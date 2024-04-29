@@ -65,8 +65,6 @@ class UrlChecker extends Component
 
                 if (!$isSaved) {
                     $errors = $urlStatus->errors;
-                    $statusCodes['errors'] = $errors;
-                    return $statusCodes;
                 }
 
                 $statusCodes[] = ["url" => $url, "code" => $statusCode];
@@ -75,6 +73,9 @@ class UrlChecker extends Component
             }
         }
 
+        if (isset($errors)) {
+            $statusCodes['errors'] = $errors;
+        }
         return $statusCodes;
     }
 
@@ -87,14 +88,18 @@ class UrlChecker extends Component
     private function getStatusCodeFromUrl(string $url): string
     {
         $client = new Client();
-        $responseFromUrl = $client->createRequest()
-            ->setMethod('GET')
-            ->setUrl($url)
-            ->setOptions([
-                'timeout' => 5,
-            ])
-            ->send();
-        $statusCode = $responseFromUrl->getStatusCode();
+        try {
+            $responseFromUrl = $client->createRequest()
+                ->setMethod('GET')
+                ->setUrl($url)
+                ->setOptions([
+                    'timeout' => 5,
+                ])
+                ->send();
+            $statusCode = $responseFromUrl->getStatusCode();
+        } catch (yii\httpclient\Exception) {
+            $statusCode = 'HTTP Client Exception';
+        }
         return $statusCode;
     }
 }
