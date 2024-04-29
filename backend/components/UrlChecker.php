@@ -10,6 +10,12 @@ use yii\httpclient\Client;
 
 class UrlChecker extends Component
 {
+    /**
+     * Метод проверяет каждый url из списка
+     *
+     * @param array $urls
+     * @return array
+     */
     public function check(array $urls): array
     {
         $statusCodes = [];
