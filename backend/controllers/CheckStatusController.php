@@ -3,10 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\UrlStatus;
-use backend\components\UrlChecker;
-use DateTime;
 use Yii;
-use yii\httpclient\Client;
 use yii\web\Controller;
 
 class CheckStatusController extends Controller
