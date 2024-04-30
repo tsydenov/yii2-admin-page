@@ -25,8 +25,12 @@ class CheckStatusController extends Controller
         $request = Yii::$app->request;
         $urls = $request->getBodyParam('url');
 
-        $response = Yii::$app->urlChecker->check($urls);
+        if (isset($urls)) {
+            $response = Yii::$app->urlChecker->check($urls);
 
-        return $this->asJson(["codes" => $response]);
+            return $this->asJson(["codes" => $response]);
+        }
+
+        return $this->asJson(["error" => "url attribute is required!"]);
     }
 }
