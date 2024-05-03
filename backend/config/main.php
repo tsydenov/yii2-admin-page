@@ -46,7 +46,7 @@ return [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => ['checkstatus' => 'check-status']
+                    'controller' => ['checkStatus' => 'check-status']
                 ]
             ],
         ],
