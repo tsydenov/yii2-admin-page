@@ -8,7 +8,6 @@ use yii\web\Controller;
 
 class CheckStatusController extends Controller
 {
-    public $urlStatusClass = 'backend\models\UrlStatus';
     public $enableCsrfValidation = false;
 
     public function actionIndex()
