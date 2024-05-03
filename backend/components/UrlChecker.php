@@ -76,7 +76,7 @@ class UrlChecker extends Component
                 ->send();
             $statusCode = $responseFromUrl->getStatusCode();
         } catch (yii\httpclient\Exception) {
-            $statusCode = 'HTTP Client Exception';
+            $statusCode = '0';
         }
         return $statusCode;
     }
