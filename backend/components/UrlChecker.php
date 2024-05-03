@@ -22,9 +22,8 @@ class UrlChecker extends Component
         foreach ($urls as $url) {
             if (filter_var($url, FILTER_VALIDATE_URL)) {
                 $hash_string = md5($url);
-                $urlStatus = UrlStatus::findOne($hash_string);
 
-                if (isset($urlStatus)) {
+                if ($urlStatus = UrlStatus::findOne($hash_string)) {
                     $minutes = (time() - strtotime($urlStatus->updated_at)) / 60;
                     if ($minutes < 10) {
                         $statusCode = $urlStatus->status_code;
