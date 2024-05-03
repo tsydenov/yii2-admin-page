@@ -30,7 +30,7 @@ class UrlChecker extends Component
                         $statusCode = $this->getStatusCodeFromUrl($url);
                         $urlStatus->status_code = $statusCode;
                     }
-                    $urlStatus->query_count += 1;
+                    $urlStatus->query_count++;
                 } else {
                     $urlStatus = new UrlStatus();
                     $urlStatus->url = $url;
