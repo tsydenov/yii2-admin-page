@@ -19,36 +19,36 @@ class UrlChecker extends Component
     {
         $statusCodes = [];
         foreach ($urls as $url) {
-            if (filter_var($url, FILTER_VALIDATE_URL)) {
-                $hash_string = md5($url);
+            if (!filter_var($url, FILTER_VALIDATE_URL)) {
+                $statusCodes[] = ["error" => "$url is not valid!"];
+                continue;
+            }
 
-                if ($urlStatus = UrlStatus::findOne($hash_string)) {
-                    $minutes = (time() - strtotime($urlStatus->updated_at)) / 60;
-                    if ($minutes < 10) {
-                        $statusCode = $urlStatus->status_code;
-                    } else {
-                        $statusCode = $this->getStatusCodeFromUrl($url);
-                        $urlStatus->status_code = $statusCode;
-                    }
-                    $urlStatus->query_count++;
+            $hash_string = md5($url);
+            if ($urlStatus = UrlStatus::findOne($hash_string)) {
+                $minutes = (time() - strtotime($urlStatus->updated_at)) / 60;
+                if ($minutes < 10) {
+                    $statusCode = $urlStatus->status_code;
                 } else {
-                    $urlStatus = new UrlStatus();
-                    $urlStatus->url = $url;
-                    $urlStatus->hash_string = $hash_string;
                     $statusCode = $this->getStatusCodeFromUrl($url);
                     $urlStatus->status_code = $statusCode;
-                    $urlStatus->query_count = 1;
                 }
-                $isSaved = $urlStatus->save();
-
-                if (!$isSaved) {
-                    $errors = $urlStatus->errors;
-                }
-
-                $statusCodes[] = ["url" => $url, "code" => $statusCode];
+                $urlStatus->query_count++;
             } else {
-                $statusCodes[] = ["error" => "$url is not valid!"];
+                $urlStatus = new UrlStatus();
+                $urlStatus->url = $url;
+                $urlStatus->hash_string = $hash_string;
+                $statusCode = $this->getStatusCodeFromUrl($url);
+                $urlStatus->status_code = $statusCode;
+                $urlStatus->query_count = 1;
             }
+            $isSaved = $urlStatus->save();
+
+            if (!$isSaved) {
+                $errors = $urlStatus->errors;
+            }
+
+            $statusCodes[] = ["url" => $url, "code" => $statusCode];
         }
 
         if (isset($errors)) {
