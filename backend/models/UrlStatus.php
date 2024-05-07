@@ -31,6 +31,10 @@ class UrlStatus extends ActiveRecord
             [
                 'class' => TimestampBehavior::class,
                 'value' => new Expression('NOW()'),
+                'attributes' => [
+                    ActiveRecord::EVENT_AFTER_INSERT => ['created_at', 'updated_at']
+                    // updated_at attribute will be changed manually via touch() method when updating a record
+                ]
             ]
         ];
     }

@@ -32,6 +32,7 @@ class UrlChecker extends Component
                 } else {
                     $statusCode = $this->getStatusCodeFromUrl($url);
                     $urlStatus->status_code = $statusCode;
+                    $urlStatus->touch('updated_at');
                 }
                 $urlStatus->query_count++;
             } else {
