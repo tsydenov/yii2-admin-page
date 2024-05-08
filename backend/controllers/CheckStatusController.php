@@ -8,8 +8,6 @@ use yii\rest\Controller;
 
 class CheckStatusController extends Controller
 {
-    public $enableCsrfValidation = false;
-
     public function actionIndex()
     {
         $urls = UrlStatus::find()->all();
