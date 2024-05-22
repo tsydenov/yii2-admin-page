@@ -25,10 +25,7 @@ class UrlStatusSearch extends UrlStatus
             return $dataProvider;
         }
 
-        // split status codes separated by spaces into array
-        $status_codes = explode(' ', $this->status_code);
-
-        $query->andFilterWhere(['in', 'status_code', $status_codes])
+        $query->andFilterWhere(['status_code' => $this->status_code])
             ->andFilterWhere(['like', 'url', $this->url]);
 
         if (isset($params['last24Hours'])) {
