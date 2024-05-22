@@ -23,8 +23,6 @@ document.getElementById('export-button').addEventListener('click', function() {
     }
 
     let params = getUrlParams();
-    console.log(params);
-
     let form = document.createElement('form');
     form.method = 'GET';
     form.action = exportUrl;
