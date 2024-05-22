@@ -17,7 +17,9 @@ document.getElementById('export-button').addEventListener('click', function() {
         let pairs = queryString.split('&');
         for (let i = 0; i < pairs.length; i++) {
             let pair = pairs[i].split('=');
-            params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1].replace(/\+/g, ' ') || '');
+            if (pair[0] !== '') {
+                params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1].replace(/\+/g, ' ') || '');
+            }
         }
         return params;
     }
