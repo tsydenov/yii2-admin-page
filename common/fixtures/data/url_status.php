@@ -25,8 +25,8 @@ for ($i = 0; $i < count($urls); $i++) {
         'hash_string' => md5($urls[$i]),
         'status_code' => $responses[$i],
         'query_count' => 1,
-        'created_at' => new Expression('NOW()'),
-        'updated_at' => new Expression('NOW()'),
+        'created_at' => new Expression('NOW() - INTERVAL ROUND(RAND() * 14 - 4) DAY'),
+        'updated_at' => new Expression('NOW() - INTERVAL ROUND(RAND() * 3) DAY'),
     ];
 }
 
