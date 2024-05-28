@@ -18,7 +18,10 @@ class UrlStatusSearch extends UrlStatus
     {
         $query = UrlStatus::find();
         $dataProvider = new ActiveDataProvider([
-            'query' => $query
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         if (!($this->load($params) && $this->validate())) {
