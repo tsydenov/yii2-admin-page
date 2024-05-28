@@ -15,6 +15,7 @@ $this->title = 'Admin page';
         'dataProvider' => $dataProvider,
         'columns' => [
             'url', 'created_at', 'updated_at', 'status_code'
-        ]
+        ],
+        'pager' => ['class' => \yii\bootstrap5\LinkPager::class],
     ]) ?>
 </div>
