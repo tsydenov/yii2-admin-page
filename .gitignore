@@ -46,3 +46,4 @@ phpunit.phar
 .vscode
 
 /docker/.env*
+!/docker/.env.example
