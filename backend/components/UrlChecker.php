@@ -64,7 +64,7 @@ class UrlChecker extends Component
      * @param string $url
      * @return string
      */
-    private function getStatusCodeFromUrl(string $url): string
+    public function getStatusCodeFromUrl(string $url): string
     {
         $client = new Client();
         try {
@@ -76,7 +76,7 @@ class UrlChecker extends Component
                 ])
                 ->send();
             $statusCode = $responseFromUrl->getStatusCode();
-        } catch (yii\httpclient\Exception) {
+        } catch (yii\httpclient\Exception $e) {
             $statusCode = '0';
         }
         return $statusCode;
