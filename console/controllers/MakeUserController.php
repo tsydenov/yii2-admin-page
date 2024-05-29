@@ -14,9 +14,9 @@ class MakeUserController extends Controller
     /**
      * Makes active user 
      *
-     * @return void
+     * @return int
      */
-    public function actionIndex()
+    public function actionIndex(): int
     {
         $auth = Yii::$app->authManager;
         $user_role = $auth->getRole('user');

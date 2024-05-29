@@ -11,7 +11,12 @@ use yii\helpers\Console;
 
 class RbacController extends Controller
 {
-    public function actionInit()
+    /**
+     * Creates admin and user roles
+     *
+     * @return int
+     */
+    public function actionInit(): int
     {
         $auth = Yii::$app->authManager;
 
@@ -19,9 +24,16 @@ class RbacController extends Controller
         $user = $auth->createRole('user');
         $auth->add($admin);
         $auth->add($user);
+
+        return ExitCode::OK;
     }
 
-    public function actionAssignAdmin()
+    /**
+     * Assigns user an admin role
+     *
+     * @return int
+     */
+    public function actionAssignAdmin(): int
     {
         $auth = Yii::$app->authManager;
         $admin = $auth->getRole('admin');

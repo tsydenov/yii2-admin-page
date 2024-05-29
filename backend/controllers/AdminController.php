@@ -10,7 +10,7 @@ use yii\web\Response;
 
 class AdminController extends Controller
 {
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -30,7 +30,7 @@ class AdminController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $this->layout = 'main';
 
@@ -48,7 +48,7 @@ class AdminController extends Controller
      *
      * @return string
      */
-    public function actionExportToCsv()
+    public function actionExportToCsv(): string
     {
         Yii::$app->response->format = Response::FORMAT_RAW;
         Yii::$app->response->headers->set('Content-type', 'text/csv');

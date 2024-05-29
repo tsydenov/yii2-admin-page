@@ -8,13 +8,13 @@ use yii\rest\Controller;
 
 class CheckStatusController extends Controller
 {
-    public function actionIndex()
+    public function actionIndex(): array
     {
         $urls = UrlStatus::find()->all();
         return $urls;
     }
 
-    public function actionCreate()
+    public function actionCreate(): array
     {
         $request = Yii::$app->request;
         $urls = $request->getBodyParam('url');

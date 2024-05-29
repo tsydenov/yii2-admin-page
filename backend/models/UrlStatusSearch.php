@@ -7,14 +7,14 @@ use yii\db\Expression;
 
 class UrlStatusSearch extends UrlStatus
 {
-    public function rules()
+    public function rules(): array
     {
         return [
             [['url', 'status_code'], 'safe']
         ];
     }
 
-    public function search($params)
+    public function search($params): ActiveDataProvider
     {
         $query = UrlStatus::find();
         $dataProvider = new ActiveDataProvider([
