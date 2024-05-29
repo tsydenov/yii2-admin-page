@@ -13,7 +13,7 @@ class UrlStatus extends ActiveRecord
         return '{{url_status}}';
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             [['hash_string', 'url'], 'required'],
@@ -25,7 +25,7 @@ class UrlStatus extends ActiveRecord
         ];
     }
 
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             [

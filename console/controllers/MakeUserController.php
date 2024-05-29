@@ -4,6 +4,7 @@ namespace console\controllers;
 
 use common\models\User;
 use Exception;
+use Yii;
 use yii\console\Controller;
 use yii\console\ExitCode;
 use yii\helpers\Console;
@@ -13,10 +14,12 @@ class MakeUserController extends Controller
     /**
      * Makes active user 
      *
-     * @return void
+     * @return int
      */
-    public function actionIndex()
+    public function actionIndex(): int
     {
+        $auth = Yii::$app->authManager;
+        $user_role = $auth->getRole('user');
         try {
             $user = new User();
             $user->username = Console::input('Enter username: ');
@@ -26,6 +29,7 @@ class MakeUserController extends Controller
             $user->generateAuthKey();
             $user->generateEmailVerificationToken();
             $user->save();
+            $auth->assign($user_role, $user->getId());
         } catch (Exception $e) {
             echo $e->getMessage() . "\n";
             return ExitCode::UNSPECIFIED_ERROR;

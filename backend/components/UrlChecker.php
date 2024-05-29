@@ -10,7 +10,7 @@ use yii\httpclient\Client;
 class UrlChecker extends Component
 {
     /**
-     * Метод проверяет каждый url из списка
+     * Creates and/or updates rows in url_status with urls from array
      *
      * @param array $urls
      * @return array
@@ -59,12 +59,12 @@ class UrlChecker extends Component
     }
 
     /**
-     * Метод делает GET запрос к url и возвращает код ответа
+     * Sends GET request to provided url and returns status code
      *
      * @param string $url
      * @return string
      */
-    private function getStatusCodeFromUrl(string $url): string
+    public function getStatusCodeFromUrl(string $url): string
     {
         $client = new Client();
         try {
@@ -76,7 +76,7 @@ class UrlChecker extends Component
                 ])
                 ->send();
             $statusCode = $responseFromUrl->getStatusCode();
-        } catch (yii\httpclient\Exception) {
+        } catch (yii\httpclient\Exception $e) {
             $statusCode = '0';
         }
         return $statusCode;
